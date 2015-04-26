@@ -23,7 +23,6 @@
  * THE SOFTWARE.
  */
 
-#include <config.h>
 
 #include "lyaml.h"
 
@@ -313,7 +312,6 @@ static int
 event_iter (lua_State *L)
 {
    lyaml_parser *parser = (lyaml_parser *)lua_touserdata(L, lua_upvalueindex(1));
-   char *str;
 
    parser_delete_event (parser);
    if (yaml_parser_parse (&parser->parser, &parser->event) != 1)

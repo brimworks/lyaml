@@ -27,7 +27,6 @@
  *
  */
 
-#include <config.h>
 
 #include <string.h>
 #include <stdlib.h>
@@ -37,7 +36,7 @@
 #include "lyaml.h"
 
 #define MYNAME		"yaml"
-#define MYVERSION	MYNAME " library for " LUA_VERSION " / " VERSION
+#define MYVERSION	MYNAME " library for " LUA_VERSION " / %s"
 
 #define LYAML__STR_1(_s)	(#_s + 1)
 #define LYAML_STR_1(_s)		LYAML__STR_1(_s)
@@ -60,7 +59,8 @@ luaopen_yaml (lua_State *L)
 
    luaL_register(L, "yaml", R);
 
-   lua_pushliteral(L, MYVERSION);
+   lua_pushfstring(L, MYVERSION, yaml_get_version_string());
+       
    lua_setfield(L, -2, "version");
 
    return 1;

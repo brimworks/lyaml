@@ -23,10 +23,8 @@
  * THE SOFTWARE.
  */
 
-#include <config.h>
 
 #include "lyaml.h"
-
 
 typedef struct {
    lua_State	 *L;
@@ -94,6 +92,7 @@ scan_STREAM_START (lyaml_scanner *scanner)
 #undef MENTRY
 
       default:
+         encoding = NULL; // Prevent warnings...
          lua_pushfstring (L, "invalid encoding %d", EVENTF (encoding));
          lua_error (L);
    }
@@ -184,6 +183,7 @@ scan_SCALAR (lyaml_scanner *scanner)
 #undef MENTRY
 
       default:
+         style = NULL; /* Stop warnings...*/
          lua_pushfstring (L, "invalid scalar style %d", EVENTF (style));
          lua_error (L);
    }
@@ -232,7 +232,6 @@ static int
 token_iter (lua_State *L)
 {
    lyaml_scanner *scanner = (lyaml_scanner *)lua_touserdata(L, lua_upvalueindex(1));
-   char *str;
 
    scanner_delete_token (scanner);
    if (yaml_parser_scan (&scanner->parser, &scanner->token) != 1)

@@ -23,7 +23,6 @@
  * THE SOFTWARE.
  */
 
-#include <config.h>
 #include <assert.h>
 
 #include "lyaml.h"
@@ -166,7 +165,7 @@ static int
 emit_MAPPING_START (lua_State *L, lyaml_emitter *emitter)
 {
    yaml_event_t event;
-   yaml_mapping_style_t yaml_style;
+   yaml_mapping_style_t yaml_style = YAML_ANY_MAPPING_STYLE;
    yaml_char_t *anchor = NULL, *tag = NULL;
    int implicit = 1;
    const char *style = NULL;
@@ -209,7 +208,7 @@ static int
 emit_SEQUENCE_START (lua_State *L, lyaml_emitter *emitter)
 {
    yaml_event_t event;
-   yaml_sequence_style_t yaml_style;
+   yaml_sequence_style_t yaml_style = YAML_ANY_SEQUENCE_STYLE;
    yaml_char_t *anchor = NULL, *tag = NULL;
    int implicit = 1;
    const char *style = NULL;
@@ -252,7 +251,7 @@ static int
 emit_SCALAR (lua_State *L, lyaml_emitter *emitter)
 {
    yaml_event_t event;
-   yaml_scalar_style_t yaml_style;
+   yaml_scalar_style_t yaml_style = YAML_ANY_SCALAR_STYLE;
    yaml_char_t *anchor = NULL, *tag = NULL, *value;
    int length = 0, plain_implicit = 1, quoted_implicit = 1;
    const char *style = NULL;
