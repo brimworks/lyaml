@@ -26,6 +26,10 @@
 
 #include "lyaml.h"
 
+#ifdef _MSC_VER
+# define snprintf _snprintf 
+#endif
+
 typedef struct {
    lua_State	 *L;
    yaml_parser_t  parser;
